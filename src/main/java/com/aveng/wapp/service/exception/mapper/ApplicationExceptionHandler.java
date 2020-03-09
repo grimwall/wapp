@@ -12,6 +12,8 @@ import com.aveng.wapp.web.rest.model.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * Handles ALL {@link ApplicationException}s, logging and returning a response
+ *
  * @author apaydin
  */
 @Component
@@ -52,7 +54,6 @@ public class ApplicationExceptionHandler {
 
         ApiResponse<String> apiResponse = ApiResponse.<String>builder()
             .message(errorMessage)
-            //.data(ExceptionUtils.getStackTrace(exception))
             .build();
 
         return new ResponseEntity<>(apiResponse, HttpStatus.valueOf(exception.getStatus()));

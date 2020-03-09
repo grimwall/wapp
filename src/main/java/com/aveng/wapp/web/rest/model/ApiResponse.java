@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * Base Api response class
+ *
  * @author apaydin
  */
 @Data

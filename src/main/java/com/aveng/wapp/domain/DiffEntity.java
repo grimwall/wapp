@@ -36,7 +36,7 @@ public class DiffEntity implements Serializable {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     protected String id;
 
-    @Column(name = "DIFF_ID")
+    @Column(name = "DIFF_ID", unique = true)
     private long diffId;
 
     @Column(name = "LEFT_TEXT")

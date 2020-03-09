@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
+ * All DB related configs goes here
+ *
  * @author apaydin
  */
 @Configuration

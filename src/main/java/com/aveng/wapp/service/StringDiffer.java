@@ -37,9 +37,7 @@ public class StringDiffer {
 
         List<StringDiff> stringDiffs = findDiffs(leftText, rightText);
 
-        return StringDiffResult.builder()
-            .message("Provided strings have diffs.")
-            .stringDiffs(stringDiffs).build();
+        return StringDiffResult.builder().message("Provided strings have diffs.").stringDiffs(stringDiffs).build();
     }
 
     private List<StringDiff> findDiffs(@NonNull String leftText, @NonNull String rightText) {
@@ -65,6 +63,12 @@ public class StringDiffer {
                 currentDiff = new StringDiff();
                 currentDiff.setOffset(i);
                 hasStartedADiff = true;
+
+                //last char diff must be added! (edge case)
+                if (i == leftText.length() - 1) {
+                    currentDiff.setLength(1);
+                    stringDiffs.add(currentDiff);
+                }
             } else if (hasStartedADiff && left == right) {
                 //finish the current diff
                 currentDiff.setLength(i - currentDiff.getOffset());
@@ -73,6 +77,7 @@ public class StringDiffer {
             }
             // no need to do anything, keep going
         }
+
         return stringDiffs;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aveng.wapp.service.DiffService;
 import com.aveng.wapp.service.dto.Diff;
+import com.aveng.wapp.service.dto.DiffType;
 import com.aveng.wapp.service.dto.StringDiff;
 import com.aveng.wapp.service.dto.StringDiffResult;
 import com.aveng.wapp.web.rest.model.ApiResponse;
@@ -40,7 +41,7 @@ public class DiffController {
 
         log.info("Accepted left input: {} for id: {}", base64EncodedInput, id);
 
-        Diff diff = diffService.acceptLeft(id, base64EncodedInput);
+        Diff diff = diffService.acceptDiffInput(id, base64EncodedInput, DiffType.LEFT);
 
         return ResponseEntity.ok(ApiResponse.<Diff>builder()
             .message("Left diff accepted")
@@ -54,7 +55,7 @@ public class DiffController {
 
         log.info("Accepted right input: {} for id: {}", base64EncodedInput, id);
 
-        Diff diff = diffService.acceptRight(id, base64EncodedInput);
+        Diff diff = diffService.acceptDiffInput(id, base64EncodedInput, DiffType.RIGHT);
 
         return ResponseEntity.ok(ApiResponse.<Diff>builder()
             .message("right diff accepted")

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.aveng.wapp.repository.DiffRepository;
 import com.aveng.wapp.service.dto.Diff;
+import com.aveng.wapp.service.dto.DiffType;
 import com.aveng.wapp.service.dto.StringDiffResult;
 import com.aveng.wapp.service.exception.ApplicationException;
 import com.aveng.wapp.service.mapper.DiffMapper;
@@ -43,37 +44,27 @@ public class DiffService {
     }
 
     /**
-     * Given diff id, creates or updates a diff's left text and returns diff resource.
+     * Given diff id, creates or updates a diff's text and returns diff resource.
      *
      * @param diffId id of the diff
      * @param base64EncodedInput a String representing an base64 encoded JSON object
+     * @param diffType Specifies which diff input will be updated
      * @return resulting diff
      */
-    public Diff acceptLeft(long diffId, String base64EncodedInput) {
+    public Diff acceptDiffInput(long diffId, String base64EncodedInput, DiffType diffType) {
 
         String decodedString = validateInput(base64EncodedInput);
 
         Diff diff = retrieveDiff(diffId).orElse(Diff.builder().diffId(diffId).build());
 
-        diff.setLeftText(decodedString);
-
-        return persistDiff(diff);
-    }
-
-    /**
-     * Given diff id, creates or updates a diff's right text and returns the diff resource.
-     *
-     * @param diffId id of the diff
-     * @param base64EncodedInput a String representing an base64 encoded JSON object
-     * @return resulting diff
-     */
-    public Diff acceptRight(long diffId, String base64EncodedInput) {
-
-        String decodedString = validateInput(base64EncodedInput);
-
-        Diff diff = retrieveDiff(diffId).orElse(Diff.builder().diffId(diffId).build());
-
-        diff.setRightText(decodedString);
+       switch (diffType){
+           case LEFT:
+               diff.setLeftText(decodedString);
+               break;
+           case RIGHT:
+               diff.setRightText(decodedString);
+               break;
+       }
 
         return persistDiff(diff);
     }
@@ -114,7 +105,6 @@ public class DiffService {
     }
 
     private Optional<Diff> retrieveDiff(long id) {
-
         return diffRepository.findByDiffId(id).map(diffEntity -> diffMapper.map(diffEntity));
     }
 
