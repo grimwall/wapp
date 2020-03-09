@@ -44,7 +44,7 @@ public class DiffService {
     }
 
     /**
-     * Given diff id, creates or updates a diff's text and returns diff resource.
+     * Given diff id, creates or updates a diff's text and returns the diff resource.
      *
      * @param diffId id of the diff
      * @param base64EncodedInput a String representing an base64 encoded JSON object
