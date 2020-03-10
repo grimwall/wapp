@@ -1,4 +1,4 @@
-package com.aveng.wapp.service.exception.mapper;
+package com.aveng.wapp.service.exception.handler;
 
 import java.util.Objects;
 

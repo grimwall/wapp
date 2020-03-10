@@ -1,4 +1,4 @@
-package com.aveng.wapp.service.exception.mapper;
+package com.aveng.wapp.service.exception.handler;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.core.Ordered;

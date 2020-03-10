@@ -9,6 +9,7 @@ import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aveng.wapp.repository.DiffRepository;
 import com.aveng.wapp.service.dto.Diff;
@@ -51,22 +52,25 @@ public class DiffService {
      * @param diffType Specifies which diff input will be updated
      * @return resulting diff
      */
+    @Transactional
     public Diff acceptDiffInput(long diffId, String base64EncodedInput, DiffType diffType) {
 
         String decodedString = validateInput(base64EncodedInput);
 
         Diff diff = retrieveDiff(diffId).orElse(Diff.builder().diffId(diffId).build());
 
-       switch (diffType){
-           case LEFT:
-               diff.setLeftText(decodedString);
-               break;
-           case RIGHT:
-               diff.setRightText(decodedString);
-               break;
-       }
+        switch (diffType) {
+            case LEFT:
+                diff.setLeftText(decodedString);
+                break;
+            case RIGHT:
+                diff.setRightText(decodedString);
+                break;
+        }
 
-        return persistDiff(diff);
+        diffRepository.save(diffMapper.map(diff));
+
+        return diff;
     }
 
     /**
@@ -98,10 +102,6 @@ public class DiffService {
         checkValidJSON(decodedString);
 
         return decodedString;
-    }
-
-    private Diff persistDiff(Diff diff) {
-        return diffMapper.map(diffRepository.save(diffMapper.map(diff)));
     }
 
     private Optional<Diff> retrieveDiff(long id) {

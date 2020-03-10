@@ -42,6 +42,7 @@ public class DiffControllerTest {
     public static final String RIGHT_TEXT = "rightText";
     public static final String LEFT_PATH = "/v1/diff/%d/left";
     public static final String RIGHT_PATH = "/v1/diff/%d/right";
+    public static final String DIFF_ID = "diffId";
 
     @Autowired
     private DiffRepository diffRepository;
@@ -65,7 +66,6 @@ public class DiffControllerTest {
         DiffEntity persistedDiff = diffRepository.findByDiffId(1L).orElse(null);
 
         assertEquals(1L, persistedDiff.getDiffId());
-        assertEquals(persistedDiff.getId(), data.get(ID));
         assertEquals(persistedDiff.getLeftText(), VALID_INPUT);
     }
 
@@ -87,7 +87,6 @@ public class DiffControllerTest {
 
         assertEquals(diffEntityInitial.getId(), updatedDiff.getId());
         assertEquals(1L, updatedDiff.getDiffId());
-        assertEquals(updatedDiff.getId(), data.get(ID));
         assertEquals(updatedDiff.getLeftText(), VALID_INPUT_2);
     }
 
@@ -112,7 +111,6 @@ public class DiffControllerTest {
         DiffEntity persistedDiff = diffRepository.findByDiffId(1L).orElse(null);
 
         assertEquals(1L, persistedDiff.getDiffId());
-        assertEquals(persistedDiff.getId(), data.get(ID));
         assertEquals(persistedDiff.getRightText(), VALID_INPUT);
     }
 
@@ -130,7 +128,6 @@ public class DiffControllerTest {
         DiffEntity updatedDiff = diffRepository.findByDiffId(1L).orElse(null);
 
         assertEquals(1L, updatedDiff.getDiffId());
-        assertEquals(updatedDiff.getId(), data.get(ID));
         assertEquals(updatedDiff.getLeftText(), VALID_INPUT);
         assertEquals(updatedDiff.getRightText(), VALID_INPUT_2);
     }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 /**
  * Our base ApplicationException for all custom exceptions. Default log level is ERROR.
  * Default HTTP Status of the returned response is 500.
- * Will be handled by {@link com.aveng.wapp.service.exception.mapper.ApplicationExceptionHandler}
+ * Will be handled by {@link com.aveng.wapp.service.exception.handler.ApplicationExceptionHandler}
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

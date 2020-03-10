@@ -44,7 +44,6 @@ Example response:
 {
     "message": "Left diff accepted",
     "data": {
-        "id": "b7b5c61a-0ee9-4d28-ba85-4be77a32362e",
         "diffId": 2,
         "leftText": "{\n\"resource\": \"abcdefg123----\",\n\"target\": \"abcdefg----123\",\n\"test\": 60\n}",
         "rightText": null
@@ -71,7 +70,6 @@ Example response:
 {
     "message": "right diff accepted",
     "data": {
-        "id": "23e3a90a-5636-42fe-b802-f60f0da04cf1",
         "diffId": 4,
         "leftText": "{\n\"resource\": \"abcdefg123----\",\n\"target\": \"abcdefg----123\",\n\"test\": 60\n}",
         "rightText": "{\n\"resource\": \"abcdefg123xx--\",\n\"target\": \"abcdefg----123\",\n\"test\": 60\n}"
